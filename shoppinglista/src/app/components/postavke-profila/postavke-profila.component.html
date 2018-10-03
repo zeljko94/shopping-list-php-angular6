@@ -1,0 +1,54 @@
+
+<div class="row">
+    <div class="col-xs-12 text-left">
+      <h1>Postavke profila</h1>
+      <hr>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-6 text-left">
+
+        <div [ngClass]="user.Ime ? 'form-group' : 'form-group has-error has-feedback'">
+            <label>Ime:</label>
+            <input type="text" class="form-control" [ngModel]="user.Ime" (ngModelChange)="user.Ime = $event" placeholder="Ime..." />
+            <p *ngIf="user.Ime == ''" style="color: red;">Unesite ime!</p>
+        </div>
+
+        <div [ngClass]="user.Prezime ? 'form-group' : 'form-group has-error has-feedback'">
+            <label>Prezime:</label>
+            <input type="text" class="form-control" [ngModel]="user.Prezime" (ngModelChange)="user.Prezime = $event" placeholder="Prezime..." />
+            <p *ngIf="user.Prezime == ''" style="color: red;">Unesite prezime!</p>
+        </div>
+
+        <div [ngClass]="user.Email ? 'form-group' : 'form-group has-error has-feedback'">
+            <label>E-mail:</label>
+            <input type="text" class="form-control" [ngModel]="user.Email" (ngModelChange)="user.Email = $event" placeholder="Email..." />
+            <p *ngIf="user.Email == ''" style="color: red;">Unesite e-mail!</p>
+        </div>
+
+        <div [ngClass]="user.Password ? 'form-group' : 'form-group has-error has-feedback'">
+            <label>Password:</label>
+            <input type="password" class="form-control" [ngModel]="user.Password" (ngModelChange)="user.Password = $event" placeholder="Password..." />
+            <p *ngIf="user.Password == ''" style="color: red;">Unesite password!</p>
+            <p *ngIf="user.Password != RePassword" style="color: red;">Passwordi se ne podudaraju!</p>
+        </div>
+
+        <div [ngClass]="RePassword ? 'form-group' : 'form-group has-error has-feedback'">
+            <label>Ponovi password:</label>
+            <input type="password" class="form-control" [ngModel]="RePassword" (ngModelChange)="RePassword = $event" placeholder="Ponovi password..." />
+            <p *ngIf="RePassword == ''" style="color: red;">Unesite ponovljeni password!</p>
+            <p *ngIf="user.Password != RePassword" style="color: red;">Passwordi se ne podudaraju!</p>
+        </div>
+
+
+        <div class="row">
+          <div class="col-xs-6 text-left">
+              <button class="btn btn-success btn-lg" style="margin-right: 25px;" (click)="save()"><i class="fa fa-save"></i>&nbsp;Spremi</button>
+              <button class="btn btn-danger btn-lg" (click)="user = {}; RePassword = null"><i class="fa fa-undo"></i>&nbsp;Reset</button>
+          </div>
+        </div>
+
+    </div>
+  </div>
+  <h1></h1>

@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-xs-12 text-left">
+    <h1>Dodaj shopping listu</h1>
+  </div>
+</div>
+<hr>
+
+<div class="row">
+  <div class="col-xs-6 text-left">
+    <div [ngClass]="shoppingList.Naziv == '' ? 'form-group has-error has-feedback' : 'form-group'">
+      <label>Naziv:</label>
+      <input type="text" class="form-control" [ngModel]="shoppingList.Naziv" (ngModelChange)="shoppingList.Naziv = $event" placeholder="Naziv liste..." />
+      <p *ngIf="shoppingList.Naziv == ''" style="color: red;">Unesite naziv liste!</p>
+    </div>
+  </div>
+</div>
+
+
+<hr>
+<h1 class="text-left">TOTAL:<strong>   {{shoppingList.Total | number:'.2-2'}} KM</strong></h1>
+<hr>
+
+
+<h3 class="text-left">Namirnice:</h3>
+<hr>
+
+<div class="row" *ngFor="let item of shoppingList.Items; let i = index">
+  <div class="col-xs-1 text-left text-center">
+      <div class="form-group" style="font-weight: bold;font-size: 22px;padding-top: 20px;">
+          {{i+1}}.
+      </div>
+    </div>
+
+  <div class="col-xs-4 text-left">
+    <div class="form-group">
+      <label>Namirnica:</label>
+      <select class="form-control" name="namirnica-select" [ngModel]="item.Namirnica" (ngModelChange)="item.Namirnica = $event; ch($event, item)">
+          <option *ngFor="let n of namirnice" [ngValue]="n">{{n.Naziv}}  -  {{n.Cijena | number:'.2-2'}}KM</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="col-xs-2 text-left">
+    <div class="form-group">
+      <label>Količina:</label>
+      <input  name="kolicina-input" (keypress)="kolicinaInputKeyPress($event)" (keyup)="kolicinaInputKeyUp($event, item)" (focusout)="kolicinaFocusOut($event, item)" [ngModel]="item.Kolicina" (ngModelChange)="item.Kolicina = $event" class="form-control" min="0" />
+    </div>
+  </div>
+
+  <div class="col-xs-2 text-left">
+      <div class="form-group">
+        <label>TOTAL:</label>
+        <input type="text" class="form-control" value="{{item.Total | number: '.2-2'}} KM" disabled />
+      </div>
+  </div>
+
+    <div class="col-xs-2 text-left">
+        <div class="form-group">
+          <span class="glyphicon glyphicon-remove remove-list-item-icon" (click)="remove(i)"></span>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-xs-6 text-left">
+      <button class="btn btn-success btn-lg" style="margin-top: 10px;margin-right: 25px;" (click)="save()"><i class="fa fa-save"></i>&nbsp;Spremi listu</button>
+    <button class="btn btn-primary btn-lg" (click)="add()" style="margin-top: 10px;"><i class="fa fa-plus"></i> &nbsp;Dodaj namirnicu</button>
+  </div>
+</div>
+
+
+<h1></h1> 

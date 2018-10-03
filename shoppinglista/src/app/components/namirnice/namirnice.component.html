@@ -1,0 +1,53 @@
+
+<div class="row">
+  <div class="col-xs-12 text-left">
+    <h1>Pregled namirnica</h1>
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-2">
+      &nbsp;&nbsp;&nbsp;<button class="btn btn-primary btn-lg" style="margin-top: 10px;" [routerLink]="['/add-namirnica']"><i class="fa fa-plus"></i> &nbsp;Dodaj namirnicu</button>
+  </div>
+
+  <div class="col-xs-1"></div>
+  <div class="col-xs-5" style="margin-top: 37px;">
+    <input type="text" class="form-control" placeholder="Search..." [ngModel]="searchTxt" (ngModelChange)="searchTxt = $event;applyFilters()" />
+  </div>
+</div>
+
+<hr>
+
+    <table class="table table-bordered table-hover ">
+        <thead>
+          <tr>
+            <th style="width: 4%;" class="namirnice-table-cell-header">#</th>
+            <th style="width: 35%;" class="namirnice-table-cell-header">Naziv</th>
+            <th style="width: 30%;" class="namirnice-table-cell-header">Slika</th>
+            <th style="width: 15%;" class="namirnice-table-cell-header">Cijena</th>
+            <th style="width: 8%;"></th>
+            <th style="width: 8%;"></th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <tr *ngFor="let n of namirnice; let i = index" align="center">
+            <td class="namirnice-table-cell">{{i+1}}</td>
+            <td class="namirnice-table-cell">{{n.Naziv}}</td>
+            <td><img [src]="n.ImgPath" style="height: 150px;width: 150px;"/></td>
+            <td class="namirnice-table-cell">{{n.Cijena | number:'.2-2'}} KM</td>
+            <td class="namirnice-table-cell"><button class="btn btn-warning" (click)="edit(n)"><i class="fa fa-edit"></i>&nbsp; Uredi</button></td>
+            <td class="namirnice-table-cell"><button class="btn btn-danger" (click)="delete(n.ID)"><i class="fa fa-trash"></i>&nbsp; Obriši</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+<!--
+<ng-container *ngIf="namirnice.length <= 0">
+  <h2 class="text-left text-danger">Nema unesenih namirnica!</h2>
+</ng-container>
+-->
+
+
+<h1></h1>

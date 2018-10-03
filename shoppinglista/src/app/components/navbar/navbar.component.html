@@ -1,0 +1,16 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" [routerLink]="['/shopping-list']" style="font-size: 27px;margin-right: 55px;">Shopping list</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li *ngFor="let i of menuItems" [ngClass]="i.active ? 'active' : ''"><a [routerLink]="[i.link]">{{i.label}}</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li style="cursor: pointer;"><a [routerLink]="['/postavke-profila']"><span class="glyphicon glyphicon-cog"></span> Postavke profila</a></li>
+          <li style="cursor: pointer;"><a (click)="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>

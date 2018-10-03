@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-xs-12 text-left">
+      <h1>{{shoppingList.ShoppingList.Naziv}}</h1>
+    </div>
+  </div>
+  <hr>
+
+  
+<h1 class="text-left">TOTAL:<strong>   {{shoppingList.ShoppingList.Total | number:'.2-2'}} KM</strong></h1>
+<hr>
+
+<!--
+  <h3 class="text-left">Namirnice:</h3>
+<hr>
+-->
+
+<table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th style="width: 4%;" class="namirnice-table-cell-header">#</th>
+        <th style="width: 4%;" class="namirnice-table-cell-header">
+          <input type="checkbox" name="all" [ngModel]="chkAll" (ngModelChange)="chkAll = $event; chkAllOnChange()"/>
+        </th>
+        <th style="width: 35%;" class="namirnice-table-cell-header">Namirnica</th>
+        <th style="width: 15%;" class="namirnice-table-cell-header">Cijena</th>
+        <th style="width: 15%;" class="namirnice-table-cell-header">Količina</th>
+        <th style="width: 15%;" class="namirnice-table-cell-header">Total</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <tr *ngFor="let item of shoppingList.Items; let i = index">
+        <td class="namirnice-table-cell">{{i+1}}</td>
+        <td class="namirnice-table-cell">
+            <input type="checkbox" name="{{item.ID}}" (change)="chkNormalOnChange(item)" [checked]="item.IsDone" />
+        </td>
+        <td class="namirnice-table-cell">{{ getNazivNamirnice(item.NamirnicaID)}}</td>
+        <td class="namirnice-table-cell">{{ getCijenaNamirnice(item.NamirnicaID) | number: '.2-2'}} KM</td>
+        <td class="namirnice-table-cell">{{ item.Kolicina }}</td>
+        <td class="namirnice-table-cell">{{ getItemTotal(item) | number: '.2-2'}} KM</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row">
+      <div class="col-xs-6 text-left">
+          <button class="btn btn-success btn-lg" style="margin-top: 10px;margin-right: 25px;" (click)="save()"><i class="fa fa-save"></i>&nbsp;Spremi izmjene</button>
+      </div>
+  </div>
+
+<h1></h1> 

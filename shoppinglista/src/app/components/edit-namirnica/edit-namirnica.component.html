@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-xs-12 text-left">
+      <h1>Izmjeni namirnicu</h1>
+    </div>
+</div>
+<hr>
+
+<div class="row">
+  <div class="col-xs-6 text-left">
+    <div [ngClass]="namirnica.Naziv == '' ? 'form-group has-error has-feedback' : 'form-group'">
+      <label>Naziv:</label>
+      <input type="text" class="form-control" [ngModel]="namirnica.Naziv" (ngModelChange)="namirnica.Naziv = $event" placeholder="Naziv namirnice..." />
+      <p *ngIf="namirnica.Naziv == ''" style="color: red;">Unesite naziv namirnice!</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-6 text-left">
+        <div [ngClass]="namirnica.Cijena == '' || (!isNumber(namirnica.Cijena) && namirnica.Cijena) ? 'form-group has-error has-feedback' : 'form-group'">
+          <label>Cijena:</label>
+          <input type="text" class="form-control" (keypress)="cijenaInputKeyPress($event)" (focusout)="cijenaFocusOut($event)" [ngModel]="namirnica.Cijena" (ngModelChange)="namirnica.Cijena = $event" placeholder="Cijena namirnice..." />
+          <p *ngIf="namirnica.Cijena && !isNumber(namirnica.Cijena)" style="color: red;">Netočan unos za cijenu!</p>
+          <p *ngIf="namirnica.Cijena == ''" style="color: red;">Unesite cijenu!</p>
+        </div>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-xs-6 text-left">
+          <div class="form-group">
+            <label>URL slike:</label>
+            <input type="text" class="form-control" [ngModel]="namirnica.ImgPath" (ngModelChange)="namirnica.ImgPath = $event" placeholder="URL slike..." />
+          </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="namirnica.ImgPath">
+        <div class="col-xs-6 text-left">
+            <div class="form-group">
+              <label>Pregled slike:</label><br>
+              <img [src]="namirnica.ImgPath" style="width: 250px;height: 250px;"/>
+            </div>
+          </div>
+      </div>
+
+    
+<div class="row">
+    <div class="col-xs-6 text-left">
+        <button class="btn btn-success btn-lg" style="margin-right: 25px;" (click)="save()"><i class="fa fa-save"></i>&nbsp;Spremi</button>
+        <button class="btn btn-danger btn-lg" (click)="namirnica = {}"><i class="fa fa-undo"></i>&nbsp;Reset</button>
+    </div>
+</div>
+
+<h1></h1>
+
+    
+
+
+

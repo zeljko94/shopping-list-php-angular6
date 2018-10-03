@@ -1,0 +1,72 @@
+<!--
+
+-->
+
+
+<div class="row">
+  <div class="col-xs-12 text-left">
+    <h1>Pregled shopping lista</h1>
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-2">  
+        &nbsp;&nbsp;&nbsp;<button class="btn btn-primary btn-lg" style="margin-top: 10px;" [routerLink]="['/add-shopping-list']"><i class="fa fa-plus"></i> &nbsp;Kreiraj novu shopping listu</button>
+    </div>
+  
+    <div class="col-xs-1"></div>
+    <div class="col-xs-2">
+      <div class="form-group text-left">
+          <div class="radio">
+              <label><input type="radio" name="optradio" [ngModel]="obavljeneRadioBtn" (ngModelChange)="obavljeneRadioBtn = $event; applyFilters()"  [value]="'1'" [checked]="obavljeneRadioBtn == '1'">Sve</label>
+            </div>
+            <div class="radio">
+              <label><input type="radio" name="optradio" [ngModel]="obavljeneRadioBtn" (ngModelChange)="obavljeneRadioBtn = $event; applyFilters()"  [value]="'2'" [checked]="obavljeneRadioBtn == '2'">Obavljene</label>
+            </div>
+            <div class="radio">
+              <label><input type="radio" name="optradio" [ngModel]="obavljeneRadioBtn" (ngModelChange)="obavljeneRadioBtn = $event;  applyFilters()"  [value]="'3'" [checked]="obavljeneRadioBtn == '3'">Neobavljene</label>
+            </div> 
+      </div>
+    </div>
+    <div class="col-xs-5" style="margin-top: 37px;">
+      <input type="text" class="form-control" placeholder="Search..." [ngModel]="searchTxt" (ngModelChange)="searchTxt = $event;applyFilters()" />
+    </div>
+  </div>
+
+<hr>
+
+<!--
+<ng-container *ngIf="shoppingListe.length <= 0">
+  <h2 class="text-left text-danger">Trenutno nema unesenih shopping lista!</h2>
+</ng-container>
+-->
+    <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th style="width: 4%;" class="namirnice-table-cell-header">#</th>
+            <th style="width: 31%;" class="namirnice-table-cell-header">Naziv</th>
+            <th style="width: 30%;" class="namirnice-table-cell-header">Datum kreiranja</th>
+            <th style="width: 15%;" class="namirnice-table-cell-header">Obavljeno?</th>
+            <th style="width: 8%;"></th>
+            <th style="width: 8%;"></th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <tr *ngFor="let sl of shoppingListe; let i = index" align="center">
+            <td class="namirnice-table-cell">{{i+1}}</td>
+            <td class="namirnice-table-cell">{{sl.ShoppingList.Naziv}}</td>
+            <td class="namirnice-table-cell">{{sl.ShoppingList.DatumKreiranja}}</td>
+            <td class="namirnice-table-cell">
+              <span *ngIf="sl.ShoppingList.IsDone" class="glyphicon glyphicon-ok" style="color: green;"></span>
+              <span *ngIf="!sl.ShoppingList.IsDone" class="glyphicon glyphicon-remove" style="color: red;"></span>
+            </td>
+            <td class="namirnice-table-cell"><button class="btn btn-warning" (click)="edit(sl.ShoppingList)"><i class="fa fa-edit"></i>&nbsp; Detaljno</button></td>
+            <td class="namirnice-table-cell"><button class="btn btn-danger" (click)="delete(sl.ShoppingList.ID)"><i class="fa fa-trash"></i>&nbsp; Obriši</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+<h1></h1>
